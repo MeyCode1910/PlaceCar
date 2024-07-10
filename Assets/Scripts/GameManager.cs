@@ -43,14 +43,14 @@ public class GameManager : MonoBehaviour
 
         KalanAracSayisiDegeri = kacArabaOlsun;
 
-         /*KalanAracSayisi.text = KalanAracSayisiDegeri.ToString();
+       //  KalanAracSayisi.text = KalanAracSayisiDegeri.ToString();
 
 
          for (int i = 0; i < kacArabaOlsun; i++)
          {
              ArabacanvasGörsel[i].SetActive(true);
          }
-            */
+            
 
     }
 
@@ -68,9 +68,9 @@ public class GameManager : MonoBehaviour
         }
         
 
-        /*ArabacanvasGörsel[AktifIndex - 1].GetComponent<Image>().sprite = AracGeldiGorsel;
+        ArabacanvasGörsel[AktifIndex - 1].GetComponent<Image>().sprite = AracGeldiGorsel;
       
-        KalanAracSayisi.text = KalanAracSayisiDegeri.ToString();*/
+     //   KalanAracSayisi.text = KalanAracSayisiDegeri.ToString();
     }
 
 
@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             Panellerim[0].SetActive(false);
+            
         }
 
         platform1.transform.Rotate(new Vector3(0, 0, -rotationSpeed[0]), Space.Self);
@@ -105,6 +106,7 @@ public class GameManager : MonoBehaviour
         
 
         Panellerim[2].SetActive(true);
+        Panellerim[3].SetActive(false);
         Invoke("KaybettinButtonuOrtayaCikart", 2);
        
     }
@@ -132,6 +134,7 @@ public class GameManager : MonoBehaviour
 
         Invoke("KazandinButtonuOrtayaCikart", 2f);
         Panellerim[1].SetActive(true);
+        Panellerim[3].SetActive(false);
     }
 
    //Bellek Yönetimi
@@ -173,6 +176,7 @@ public class GameManager : MonoBehaviour
     public void OyunBaslangic()
     {
         Panellerim[0].SetActive(false);
+        Panellerim[3].SetActive(true);
     }
 
 }
