@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour
         }
 
         platform1.transform.Rotate(new Vector3(0, 0, -rotationSpeed[0]), Space.Self);
+        platform2.transform.Rotate(new Vector3(0, 0, -rotationSpeed[1]), Space.Self);
     }
 
     public void Kaybettin()
