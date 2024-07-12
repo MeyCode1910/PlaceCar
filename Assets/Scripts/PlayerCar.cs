@@ -15,18 +15,44 @@ public class PlayerCar : MonoBehaviour
     public GameObject parcPoint;
 
     bool BaslangicNoktasi = false;
+
+    float Yükseltmedegeri;
+    bool PlatformYükselt;
+   
    
 
     private void Update()
-    {      
-        if (!BaslangicNoktasi)
-        {
-            transform.Translate(7f * Time.deltaTime * transform.forward);
-        }
+    {
         if (ilerleme)
         {
             transform.Translate(15f * Time.deltaTime * transform.forward);
         }
+
+        if (!BaslangicNoktasi)
+        {
+            transform.Translate(17f * Time.deltaTime * transform.forward);
+        }   
+
+
+
+
+        if (PlatformYükselt)
+        {
+            if (Yükseltmedegeri> gameManager.platform1.transform.position.y)
+            {
+                gameManager.platform1.transform.position = Vector3.Lerp(gameManager.platform1.transform.position,
+               new Vector3(gameManager.platform1.transform.position.x
+             , gameManager.platform1.transform.position.y + 1.3f, gameManager.platform1.transform.position.z), .010f);
+            }
+            else
+            {
+                PlatformYükselt = false;
+            }
+
+           
+        }
+
+
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -36,6 +62,12 @@ public class PlayerCar : MonoBehaviour
             transform.SetParent(parent);
             gameManager.YeniArabaGetir();
 
+            if(gameManager.YükselecekPlatform)
+            {
+                Yükseltmedegeri = gameManager.platform1.transform.position.y + 1.3f;
+                PlatformYükselt =true;
+            }
+            
             //Araba Çarptýðýnda Sabit Kalýr
            // GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY
                 //|RigidbodyConstraints.FreezePositionZ|RigidbodyConstraints.FreezeRotationX|RigidbodyConstraints.FreezeRotationY|RigidbodyConstraints.FreezeRotationZ;

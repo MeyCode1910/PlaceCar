@@ -36,8 +36,13 @@ public class GameManager : MonoBehaviour
 
     public AudioSource[] Sesler;
 
+    public bool YükselecekPlatform = false;
+
+    bool DokunmaKiidi;
+
     void Start()
     {
+        DokunmaKiidi= true;
 
         VarsayilanDegerleriKontrolEt();
 
@@ -77,19 +82,28 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.touchCount==1)
         {
-            Arabalar[AktifIndex].GetComponent<PlayerCar>().ilerleme = true;
-            AktifIndex++;
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.phase==TouchPhase.Began)
+            {
+                if (DokunmaKiidi)
+                {
+                    Panellerim[0].SetActive(false);
+                    Panellerim[3].SetActive(true);
+                    DokunmaKiidi=false;
+                }
+                else
+                {
+                    Arabalar[AktifIndex].GetComponent<PlayerCar>().ilerleme = true;
+                    AktifIndex++;
+                }
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            Panellerim[0].SetActive(false);
-            
-        }
-
-        platform1.transform.Rotate(new Vector3(0, 0, -rotationSpeed[0]), Space.Self);
+        platform1.transform.Rotate(new Vector3(0, 0, rotationSpeed[0]), Space.Self);
+        if(platform2!=null)
         platform2.transform.Rotate(new Vector3(0, 0, -rotationSpeed[1]), Space.Self);
     }
 
@@ -142,11 +156,13 @@ public class GameManager : MonoBehaviour
 
      void VarsayilanDegerleriKontrolEt()
     {
+
         if (!PlayerPrefs.HasKey("Elmas"))
         {
             PlayerPrefs.SetInt("Elmas", 0);
             PlayerPrefs.SetInt("Level", 1);
         }
+
 
         text[0].text = PlayerPrefs.GetInt("Elmas").ToString();
         text[1].text = SceneManager.GetActiveScene().name;
@@ -166,7 +182,7 @@ public class GameManager : MonoBehaviour
     public void Replay()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
+        DokunmaKiidi = true;
     }
     public void SonrakiLevel()
     {

@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/1.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/AnaMenu.unity
-    guid: 2b0b398a2f6e5d043bcc60ddb802e01b
+    path: Assets/Scenes/2.unity
+    guid: c19195a623f12a149a48d4e0b8566097
+  - enabled: 1
+    path: Assets/Scenes/3.unity
+    guid: 55ffe0f3f0ba4324080c95ddc7d66acf
+  - enabled: 1
+    path: Assets/Scenes/4.unity
+    guid: 1f0d3ef6a3b888644bc096c48b3f68e4
   m_configObjects: {}
